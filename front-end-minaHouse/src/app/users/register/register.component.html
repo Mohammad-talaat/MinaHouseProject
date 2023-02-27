@@ -1,0 +1,133 @@
+<div class="grid w-full">
+  <div class="lg:col-7 fadeindown animation-duration-1000">
+    <img
+      class="w-full"
+      style="height: 540px"
+      src="https://images.pexels.com/photos/1693027/pexels-photo-1693027.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      alt=""
+    />
+  </div>
+  <form
+    class="lg:col-4 fadeinup animation-duration-1000"
+    (ngSubmit)="onRegister()"
+    [formGroup]="registerForm"
+  >
+    <p
+      class="login-text mb-3"
+      style="font-size: 3rem; font-weight: 300; font-style: italic"
+    >
+      Sign Up
+    </p>
+    <div class="form-group w-20rem mb-4">
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText formControlName="name" />
+        <label for="float-input">Username</label>
+      </span>
+      <div *ngIf="getErrors('name') && getField('name')?.touched">
+        <p *ngIf="getErrors('name')?.['required']">
+          please provide a user name
+        </p>
+        <p *ngIf="getErrors('name')?.['minlength']">
+          user name must be 3 characters and more
+        </p>
+        <p *ngIf="getErrors('name')?.['maxlength']">
+          user name must less than 50 characters
+        </p>
+      </div>
+    </div>
+    <div class="form-group w-20rem mb-4">
+      <span class="p-float-label">
+        <input
+          id="float-input"
+          type="email"
+          pInputText
+          formControlName="email"
+        />
+        <label for="float-input">Email</label>
+      </span>
+      <div *ngIf="getErrors('email') && getField('email')?.touched">
+        <p *ngIf="getErrors('email')?.['required']">please provide a email</p>
+        <p *ngIf="getErrors('email')?.['email']">
+          please provide a valid email
+        </p>
+      </div>
+    </div>
+    <div class="form-group w-20rem mb-4">
+      <p-password formControlName="password" [toggleMask]="true"></p-password>
+      <div *ngIf="getErrors('password') && getField('password')?.touched">
+        <p *ngIf="getErrors('password')?.['required']">
+          please provide a password
+        </p>
+        <p *ngIf="getErrors('password')?.['minlength']">
+          please provide a valid password
+        </p>
+      </div>
+    </div>
+
+    <div formGroupName="address">
+      <div class="form-group w-20rem mb-4">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            formControlName="street"
+          />
+          <label for="float-input">Street</label>
+        </span>
+        <div *ngIf="getErrors('street') && getField('street')?.touched">
+          <p *ngIf="getErrors('street')?.['required']">
+            please provide a street
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group w-20rem mb-4">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            formControlName="city"
+          />
+          <label for="float-input">City</label>
+        </span>
+        <div *ngIf="getErrors('city') && getField('city')?.touched">
+          <p *ngIf="getErrors('city')?.['required']">please provide a city</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group w-20rem mb-4">
+      <span class="p-float-label w-full">
+        <input
+          id="float-input"
+          type="text"
+          pInputText
+          formControlName="phone"
+        />
+        <label for="float-input">Phone</label>
+      </span>
+      <div *ngIf="getErrors('phone') && getField('phone')?.touched">
+        <p *ngIf="getErrors('phone')?.['required']">please provide a phone</p>
+        <p *ngIf="getErrors('phone')?.['minlength']">
+          please provide a valid phone
+        </p>
+        <p *ngIf="getErrors('phone')?.['maxlength']">
+          please provide a valid phone
+        </p>
+      </div>
+    </div>
+    <h2 [style.color]="'red'" class="mb-3" If="msg">{{msg}}</h2>
+    <div class="form-group w-20rem">
+      <button
+        pButton
+        pRipple
+        type="submit"
+        [disabled]="registerForm.invalid"
+        label="Register"
+        class="p-button-rounded justify-content-center"
+      ></button>
+    </div>
+  </form>
+</div>
